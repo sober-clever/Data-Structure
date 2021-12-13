@@ -17,6 +17,7 @@ typedef struct
     AdjList vertices;
     int vexnum, arcnum;
 }ALGraph;
-void  Add_edge(ALGraph &G_,int u_,int v_,int w_);//从u到v新建一条权值为w的边
-void Dijktra(ALGraph G_, int s,int t,int& ans_, int path_[]);
+void Add_edge(ALGraph &G_,int u_,int v_,int w_);//从u到v新建一条权值为w的边
+void Dijkstra(ALGraph G_, int s,int t,int& ans_, int path_[]);
+int Locate(ALGraph G_, int u_);
 //s_是出发点，t_是目的地的，ans_是最短路的值，path是最短路的路径

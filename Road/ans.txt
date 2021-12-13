@@ -1,0 +1,3 @@
+The shortest distance is 3.
+The path is as follows:
+4<-2<-1
