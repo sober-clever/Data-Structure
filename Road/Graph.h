@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_VERTEX_NUM 800000 //上限800000条边
+#define MAX_VERTEX_NUM 800000 //上限800000个点
 //图的邻接表表示
 typedef struct ArcNode
 {
@@ -19,5 +19,6 @@ typedef struct
 }ALGraph;
 void Add_edge(ALGraph &G_,int u_,int v_,int w_);//从u到v新建一条权值为w的边
 void Dijkstra(ALGraph G_, int s,int t,int& ans_, int path_[]);
-int Locate(ALGraph G_, int u_);
+
+//int Locate(ALGraph G_, int u_);
 //s_是出发点，t_是目的地的，ans_是最短路的值，path是最短路的路径
