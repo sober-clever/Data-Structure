@@ -1,7 +1,7 @@
 #pragma once
-#define MAX_VERTEX_NUM 800000 //上限800000个点
+#define MAX_VERTEX_NUM 300000 //上限3000000个点
 //图的邻接表表示
-typedef struct ArcNode
+typedef struct ArcNode//一个ArcNode结构体占用12个字节
 {
     int adjvex;
     struct ArcNode* nextarc;

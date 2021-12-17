@@ -1,36 +1,40 @@
 #include"Graph.h"
+#include"Heap.h"
 #include<cstdlib>
 #include<cstdio>
-#include<algorithm>
-#include<queue>
+//#include<algorithm>
+//#include<queue>
 #define INF 1<<30
-using namespace std;
+//using namespace std;
 int con_num[MAX_VERTEX_NUM] = { 0 };//´æ±àºÅÎªiµÄµãÔÚG.verticesÖĞ¶ÔÓ¦µÄÏÂ±ê
 
 void  Add_edge(ALGraph& G_, int u_, int v_, int w_)//´Óuµ½vĞÂ½¨Ò»ÌõÈ¨ÖµÎªwµÄ±ß
 {//ÕâÀï¿ÉÒÔ¿¼ÂÇÏÈ°ÑG.vexnum´æÏÂÀ´
 	int num_u = con_num[u_],num_v = con_num[v_];
+	int num = G_.vexnum;
+	//AdjList temp = G_.vertices;
 	ArcNode* new_arc = (ArcNode*)malloc(sizeof(ArcNode));
 	if (!new_arc)
 	{
+		//printf("%d\n", cnt);
 		printf("Memory exceeded.\n");
 		exit(0);
 	}
 	if (!num_u )
 	{
-		G_.vertices[++G_.vexnum].firstarc = NULL;
-		G_.vertices[G_.vexnum].num = u_;
-		num_u = G_.vexnum;
+		G_.vertices[++num].firstarc = NULL;
+		G_.vertices[num].num = u_;
+		num_u = num;
 		con_num[u_] = num_u;
 	}
 	if (!num_v )
 	{
-		G_.vertices[++G_.vexnum].firstarc = NULL;
-		G_.vertices[G_.vexnum].num = v_;
-		num_v = G_.vexnum;
+		G_.vertices[++num].firstarc = NULL;
+		G_.vertices[num].num = v_;
+		num_v = num;
 		con_num[v_] = num_v;
 	}
-
+	G_.vexnum = num;
 	new_arc->weight = w_;
 	new_arc->adjvex = num_v;
 	new_arc->nextarc = G_.vertices[num_u].firstarc;
@@ -38,10 +42,12 @@ void  Add_edge(ALGraph& G_, int u_, int v_, int w_)//´Óuµ½vĞÂ½¨Ò»ÌõÈ¨ÖµÎªwµÄ±ß
 }
 void Dijkstra(ALGraph G_, int s_, int t_, int& ans_, int path_[])//ºóĞø¿ÉÓÃ¶ÑÓÅ»¯
 {
-	priority_queue <pair<int, int> > Q;
+	Heap Q;//µ÷ÓÃÓÅÏÈ¶ÓÁĞ
+	//priority_queue <pair<int, int> > Q;
 	s_ = con_num[s_];
 	t_ = con_num[t_];
-	pair<int, int> temp = make_pair(0, s_);
+	Node temp = {s_,0};
+	//pair<int, int> temp = make_pair(0, s_);
 	Q.push(temp);
 	int d[MAX_VERTEX_NUM], vis[MAX_VERTEX_NUM];
 	for (int i = 1; i <= G_.vexnum; i++)
@@ -62,7 +68,7 @@ void Dijkstra(ALGraph G_, int s_, int t_, int& ans_, int path_[])//ºóĞø¿ÉÓÃ¶ÑÓÅ»
 	{
 		temp = Q.top();
 		Q.pop();
-		int u = temp.second;
+		int u = temp.m_u;
 		if (vis[u])//Ö®Ç°³ö¶Ó¹ı
 			continue;
 		vis[u] = 1;
@@ -73,7 +79,7 @@ void Dijkstra(ALGraph G_, int s_, int t_, int& ans_, int path_[])//ºóĞø¿ÉÓÃ¶ÑÓÅ»
 			{
 				d[v] = d[u] + w;
 				path_[v] = u;
-				Q.push(make_pair(-d[v],v));
+				Q.push(Node{ v, d[v]});
 			}
 		}
 	}

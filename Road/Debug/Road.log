@@ -1,5 +1,2 @@
-﻿  Graph.cpp
-  Shortest_Road.cpp
-  正在生成代码...
-C:\Users\Tanjf\Desktop\Data-Structure\Road\Shortest_Road.cpp(25): warning C4715: “read”: 不是所有的控件路径都返回值
-  Road.vcxproj -> C:\Users\Tanjf\Desktop\Data-Structure\Road\Debug\Road.exe
+﻿  Shortest_Road.cpp
+  Road.vcxproj -> C:\Users\Tanjf\Desktop\Road\Debug\Road.exe
